@@ -4,6 +4,7 @@ const Category = require("../model/categorySchema");
 const Brand = require("../model/attributes/brandSchema");
 const Product = require("../model/productSchema");
 const logger = require("../config/logger");
+const Address = require("../model/addressSchema");
 const { name } = require("ejs");
 
 module.exports = {
@@ -327,10 +328,16 @@ module.exports = {
     });
   },
   addAddress: async (req, res) => {
-    console.log(req.body);
-    await Address.create(req.body);
-    req.flash("success", "Address Addedd");
-    res.redirect("/checkout");
+    try {
+      console.log(req.body);
+      await Address.create(req.body);
+      req.flash("success", "Address Addedd");
+      res.redirect("/checkout");
+    } catch (error) {
+      console.error(error);
+      req.flash("error", "Error adding address. Please try again.");
+      res.redirect("/checkout");
+    }
   },
   editAddress: async (req, res) => {
     try {

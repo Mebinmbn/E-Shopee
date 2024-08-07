@@ -47,7 +47,7 @@ module.exports = {
     const nextPage = parseInt(page) + 1;
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
 
-    console.log("product id: ", returns[0].order_id._id);
+    // console.log("product id: ", returns[0].order_id._id);
 
     res.render("admin/returns", {
       returns,
@@ -87,11 +87,11 @@ module.exports = {
       if (product) {
         const variantIdToFind = variant; // Assuming 'variant' is a valid string
 
-        let variantIndex = -1; // Initialize with an invalid index
+        let variantIndex = -1;
 
         for (let i = 0; i < product.variants.length; i++) {
           if (product.variants[i]._id.toString() === variantIdToFind) {
-            variantIndex = i; // Found the variant, update the index
+            variantIndex = i;
             break; // Exit the loop early
           }
         }
